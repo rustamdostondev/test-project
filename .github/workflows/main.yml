@@ -1,0 +1,38 @@
+name: CI/CD for Nest.js
+
+on:
+  push:
+    branches:
+      - main # Change this to match your main branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Nest.js app
+        run: npm run build # Use the appropriate build command for your project
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+      - name: Deploy to PM2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }} # Replace with your server's IP
+          username: ${{ secrets.SSH_USERNAME }} # Replace with your SSH username
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # Add your SSH private key as a secret in GitHub
+          script: |
+            cd ~/workers/test-project/
+            git pull
+            npm i --force
+            pm2 restart main
