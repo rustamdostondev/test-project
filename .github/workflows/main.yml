@@ -26,11 +26,11 @@ jobs:
 
     steps:
       - name: Deploy to PM2
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.SERVER_IP }} # Replace with your server's IP
           username: ${{ secrets.SSH_USERNAME }} # Replace with your SSH username
-          key: ${{ secrets.SSH_PRIVATE_KEY }} # Add your SSH private key as a secret in GitHub
+          password: ${{ secrets.SSH_PASSWORD }} # Add your SSH private key as a secret in GitHub
           port: 22
           script: |
             cd ~/workers/test-project/
