@@ -31,6 +31,7 @@ jobs:
           host: ${{ secrets.SERVER_IP }} # Replace with your server's IP
           username: ${{ secrets.SSH_USERNAME }} # Replace with your SSH username
           key: ${{ secrets.SSH_PRIVATE_KEY }} # Add your SSH private key as a secret in GitHub
+          port: 22
           script: |
             cd ~/workers/test-project/
             git pull
