@@ -16,8 +16,8 @@ jobs:
       - name: Install dependencies
         run: npm install --force
 
-      - name: Build Nest.js app
-        run: npm run build # Use the appropriate build command for your project
+      # - name: Build Nest.js app
+      # run: npm run build # Use the appropriate build command for your project
 
   deploy:
     runs-on: ubuntu-latest
